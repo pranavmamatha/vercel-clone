@@ -49,7 +49,7 @@ async function init() {
     publishLog(`Build Completed`)
     const distDirPath = path.join(__dirname, "output", "dist")
     const distDirContent = fs.readdirSync(distDirPath, { recursive: true })
-    console.log("starting to upoad")
+    console.log("starting to upload")
     publishLog("Starting to upload")
     for (const filePath of distDirContent) {
       console.log("Uploading", filePath)
