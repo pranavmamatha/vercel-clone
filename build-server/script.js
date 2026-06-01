@@ -53,7 +53,7 @@ async function init() {
     publishLog("Starting to upload")
     for (const filePath of distDirContent) {
       console.log("Uploading", filePath)
-      publishLog(`uploading ${file}`)
+      publishLog(`uploading ${filePath}`)
       const fullPath = path.join(distDirPath, filePath)
       if (fs.lstatSync(fullPath).isDirectory()) continue;
       const relativePath = path.relative(distDirPath, fullPath)
@@ -66,7 +66,7 @@ async function init() {
       })
 
       await s3Client.send(command)
-      publishLog(`uploaded ${file}`)
+      publishLog(`uploaded ${filePath}`)
       console.log("Uploaded", filePath)
     }
     console.log("Done...")
