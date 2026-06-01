@@ -1,9 +1,26 @@
 const express = require("express")
 const { generateSlug } = require("random-word-slugs")
 const { ECSClient, RunTaskCommand } = require("@aws-sdk/client-ecs")
+const { Server } = require("socket.io")
+const Redis = require("ioredis")
 
 const app = express();
 require("dotenv").config()
+
+const subscriber = new Redis(process.env.REDIS)
+
+const io = new Server({ cors: "*" })
+
+io.on('connection', socket => {
+  socket.on("subscribe", channel => {
+    socket.join(channel)
+    socket.emit("message", `Joined ${channel}`)
+  })
+})
+
+io.listen(process.env.SOCKET_PORT, () => {
+  console.log("Socker server listening at", process.env.SOCKET_PORT)
+})
 
 const region = process.env.AWS_REGION
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
@@ -60,6 +77,15 @@ app.post("/projects", async (req, res) => {
   return res.json({ status: "queued", data: { projectSlug, url: `http://${projectSlug}.localhost:8000` } })
 })
 
+async function initRedisSubscribe() {
+  console.log("Subscribed to logs...")
+  subscriber.psubscribe("logs:*")
+  subscriber.on("pmessage", (pattern, channel, message) => {
+    io.to(channel).emit("message", message)
+  })
+}
+
+initRedisSubscribe()
 
 app.listen(process.env.PORT, () => {
   console.log("API server running in port", process.env.PORT)
