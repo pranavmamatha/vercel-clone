@@ -1,0 +1,66 @@
+const express = require("express")
+const { generateSlug } = require("random-word-slugs")
+const { ECSClient, RunTaskCommand } = require("@aws-sdk/client-ecs")
+
+const app = express();
+require("dotenv").config()
+
+const region = process.env.AWS_REGION
+const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
+const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
+
+const ecsClient = new ECSClient({
+  region,
+  credentials: {
+    accessKeyId,
+    secretAccessKey
+  }
+})
+
+app.use(express.json())
+
+app.post("/projects", async (req, res) => {
+  const { gitURL } = req.body;
+  const projectSlug = generateSlug();
+
+  // Spin docker containers
+  const command = new RunTaskCommand({
+    cluster: process.env.AWS_CLUSTER_ARN,
+    taskDefinition: process.env.AWS_TASK_DEFINITION_ARN,
+    launchType: 'FARGATE',
+    count: 1,
+    networkConfiguration: {
+      awsvpcConfiguration: {
+        assignPublicIp: 'ENABLED',
+        securityGroups: [
+          process.env.SECURITY_GROUP_1
+        ],
+        subnets: [
+          process.env.SUBNET_1,
+          process.env.SUBNET_2,
+          process.env.SUBNET_3
+        ]
+      }
+    },
+    overrides: {
+      containerOverrides: [
+        {
+          name: 'builder-image',
+          environment: [
+            { name: 'GIT_REPOSITORY_URL', value: gitURL },
+            { name: 'PROJECT_ID', value: projectSlug }
+          ]
+        }
+      ]
+    }
+  })
+
+  await ecsClient.send(command);
+
+  return res.json({ status: "queued", data: { projectSlug, url: `http://${projectSlug}.localhost:8000` } })
+})
+
+
+app.listen(process.env.PORT, () => {
+  console.log("API server running in port", process.env.PORT)
+})
