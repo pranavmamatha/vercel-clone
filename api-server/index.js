@@ -79,7 +79,7 @@ app.post("/projects", async (req, res) => {
 
 async function initRedisSubscribe() {
   console.log("Subscribed to logs...")
-  subscriber.psubscribe("logs:*")
+  subscriber.psubscribe(`logs:${projectSlug}`)
   subscriber.on("pmessage", (pattern, channel, message) => {
     io.to(channel).emit("message", message)
   })
