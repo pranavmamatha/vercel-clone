@@ -254,9 +254,12 @@ export default function Home() {
                       {done ? "✓ DEPLOYED" : "BUILDING..."}
                     </div>
                     <div style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "-0.3px" }}>{slug}</div>
+                    {done && deployUrl && (
+                      <div style={{ fontSize: "12px", color: "#555", marginTop: "4px", wordBreak: "break-all" }}>{deployUrl}</div>
+                    )}
                   </div>
-                  <div className="result-actions">
-                    {deployUrl && (
+                  {done && deployUrl && (
+                    <div className="result-actions">
                       <button onClick={copyUrl}
                         style={{
                           background: copiedUrl ? "#0a2e10" : "#111",
@@ -268,8 +271,6 @@ export default function Home() {
                         }}>
                         {copiedUrl ? "✓ Copied" : "Copy URL"}
                       </button>
-                    )}
-                    {done && deployUrl && (
                       <a href={deployUrl} target="_blank" rel="noopener noreferrer"
                         style={{
                           background: "#11cd2f", color: "#000", borderRadius: "8px",
@@ -278,8 +279,8 @@ export default function Home() {
                         }}>
                         Visit Site ↗
                       </a>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
