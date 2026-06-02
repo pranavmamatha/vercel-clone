@@ -5,7 +5,9 @@ const { Server } = require("socket.io")
 const Redis = require("ioredis")
 
 const app = express();
+const cors = require("cors")
 require("dotenv").config()
+app.use(cors())
 
 const subscriber = new Redis(process.env.REDIS)
 
@@ -79,7 +81,7 @@ app.post("/projects", async (req, res) => {
 
 async function initRedisSubscribe() {
   console.log("Subscribed to logs...")
-  subscriber.psubscribe(`logs:${projectSlug}`)
+  subscriber.psubscribe("logs:*")
   subscriber.on("pmessage", (pattern, channel, message) => {
     io.to(channel).emit("message", message)
   })

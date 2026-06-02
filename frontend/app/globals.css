@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #000000;
+  --card: #131315;
+  --green: #11cd2f;
+  --muted: #8a8a93;
+  --text: #ffffff;
+}
+
+body {
+  background-color: var(--bg);
+  font-family: "Inter", sans-serif;
+  color: var(--text);
+  margin: 0;
+}
+
+::selection {
+  background-color: #000;
+  color: #fff;
+}
+
+html {
+  scroll-behavior: smooth;
+}

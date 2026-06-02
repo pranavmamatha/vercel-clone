@@ -1,0 +1,5 @@
+{
+  "buildCommand": "NEXT_PUBLIC_API_URL=https://leaders-ordered-transparent-diamonds.trycloudflare.com NEXT_PUBLIC_SOCKET_URL=https://leaders-ordered-transparent-diamonds.trycloudflare.com npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs"
+}
