@@ -11,7 +11,12 @@ app.use(cors())
 
 const subscriber = new Redis(process.env.REDIS)
 
-const io = new Server({ cors: "*" })
+const io = new Server({
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+})
 
 io.on('connection', socket => {
   socket.on("subscribe", channel => {

@@ -1,5 +1,3 @@
 {
-  "buildCommand": "NEXT_PUBLIC_API_URL=https://api.vercel-clone.pranav.works NEXT_PUBLIC_SOCKET_URL=https://socket.vercel-clone.pranav.works npm run build",
-  "outputDirectory": ".next",
   "framework": "nextjs"
 }
