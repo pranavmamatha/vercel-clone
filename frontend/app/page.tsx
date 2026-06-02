@@ -10,7 +10,6 @@ const SAMPLE_REPOS = [
   { label: "Brainwave", url: "https://github.com/adrianhajdin/brainwave" },
   { label: "Nike Landing", url: "https://github.com/adrianhajdin/nike_landing_page" },
   { label: "iPhone Clone", url: "https://github.com/adrianhajdin/iphone" },
-  { label: "3D Portfolio", url: "https://github.com/adrianhajdin/project_3D_developer_portfolio" },
   { label: "Animated Portfolio", url: "https://github.com/safak/animated-portfolio" },
 ];
 
