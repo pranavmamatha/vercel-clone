@@ -235,8 +235,8 @@ export default function Home() {
                 <button onClick={deploy} disabled={loading || !gitURL.trim()} className="deploy-btn"
                   style={{
                     background: loading ? "#0a5018" : "#11cd2f",
-                    opacity: !gitURL.trim() ? 0.4 : 1,
-                    cursor: loading ? "wait" : "pointer",
+                    opacity: loading || !gitURL.trim() ? 0.4 : 1,
+                    cursor: loading ? "not-allowed" : !gitURL.trim() ? "default" : "pointer",
                   }}>
                   {loading ? "Deploying…" : "Deploy →"}
                 </button>
