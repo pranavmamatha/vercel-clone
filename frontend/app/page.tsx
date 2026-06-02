@@ -97,45 +97,50 @@ export default function Home() {
         * { box-sizing: border-box; }
         html { font-size: 16px; }
 
-        .nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; border-bottom: 1px solid #141414; }
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 32px; border-bottom: 1px solid #141414; }
         .nav-links { display: flex; gap: 20px; }
 
-        .body { max-width: 1100px; margin: 0 auto; padding: 32px 20px 80px; display: flex; gap: 24px; align-items: flex-start; }
-        .main { flex: 1; min-width: 0; }
-        .sidebar { width: 220px; flex-shrink: 0; }
+        .body { max-width: 1060px; margin: 0 auto; padding: 40px 32px 80px; display: flex; gap: 28px; align-items: flex-start; }
+        .main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+        .sidebar { width: 210px; flex-shrink: 0; }
         .sidebar-card { background: #0d0d0d; border: 1px solid #1e1e1e; border-radius: 14px; padding: 20px; position: sticky; top: 20px; }
 
-        .hero { margin-bottom: 24px; }
-        .hero h1 { font-size: clamp(26px, 5vw, 44px); font-weight: 700; letter-spacing: -2px; line-height: 1.1; margin: 0 0 10px; }
+        .hero { margin-bottom: 4px; }
+        .hero h1 { font-size: clamp(26px, 4.5vw, 42px); font-weight: 700; letter-spacing: -2px; line-height: 1.1; margin: 0 0 10px; }
+        .hero p { color: #444; font-size: 13px; line-height: 1.6; margin: 0; }
 
-        .samples { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+        .card { background: #0d0d0d; border: 1px solid #1e1e1e; border-radius: 14px; padding: 18px 20px; }
+
+        .samples { display: flex; gap: 8px; flex-wrap: wrap; }
 
         .input-row { display: flex; gap: 10px; }
         .deploy-input { flex: 1; min-width: 0; background: #000; border: 1px solid #222; border-radius: 9px; padding: 12px 16px; color: #fff; font-size: 14px; font-family: Inter, sans-serif; outline: none; width: 100%; }
-        .deploy-btn { background: #11cd2f; color: #000; border: none; border-radius: 9px; padding: 12px 20px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap; font-family: Inter, sans-serif; flex-shrink: 0; }
+        .deploy-btn { background: #11cd2f; color: #000; border: none; border-radius: 9px; padding: 12px 22px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap; font-family: Inter, sans-serif; flex-shrink: 0; transition: opacity 0.2s; }
 
         .result-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
         .result-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
-        .logs-box { height: 420px; overflow-y: auto; background: #000; border-radius: 9px; padding: 14px 16px; font-family: 'Courier New', monospace; font-size: 12.5px; color: #999; display: flex; flex-direction: column; gap: 2px; }
+        .logs-box { height: 400px; overflow-y: auto; background: #000; border-radius: 9px; padding: 14px 16px; font-family: 'Courier New', monospace; font-size: 12.5px; color: #999; display: flex; flex-direction: column; gap: 2px; }
+
+        .label { font-size: 10px; letter-spacing: 2px; font-weight: 600; text-transform: uppercase; }
 
         /* Mobile accordion for sidebar */
-        .how-accordion { display: none; background: #0d0d0d; border: 1px solid #1e1e1e; border-radius: 14px; overflow: hidden; margin-bottom: 14px; }
+        .how-accordion { display: none; background: #0d0d0d; border: 1px solid #1e1e1e; border-radius: 14px; overflow: hidden; }
         .how-accordion-btn { width: 100%; background: none; border: none; cursor: pointer; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; color: #fff; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; }
         .how-accordion-body { padding: 0 18px 18px; border-top: 1px solid #1a1a1a; }
 
         @media (max-width: 768px) {
           .nav { padding: 12px 16px; }
-          .body { flex-direction: column; padding: 20px 16px 60px; gap: 14px; }
+          .body { flex-direction: column; padding: 20px 16px 60px; gap: 12px; }
           .sidebar { display: none; }
           .how-accordion { display: block; }
           .input-row { flex-direction: column; }
-          .deploy-btn { width: 100%; padding: 14px; font-size: 15px; }
+          .deploy-btn { width: 100%; padding: 14px; font-size: 15px; justify-content: center; }
           .deploy-input { font-size: 15px; padding: 13px 16px; }
           .result-row { flex-direction: column; align-items: flex-start; }
           .result-actions { width: 100%; }
           .result-actions a, .result-actions button { flex: 1; text-align: center; }
-          .logs-box { height: 340px; font-size: 11.5px; padding: 12px; }
+          .logs-box { height: 320px; font-size: 11.5px; padding: 12px; }
           .samples { gap: 6px; }
         }
 
@@ -180,12 +185,10 @@ export default function Home() {
                 DEPLOY ANYTHING
               </div>
               <h1>
-                <span style={{ color: "#333" }}>Your GitHub repo,</span><br />
-                <span style={{ color: "#fff" }}>live in seconds.</span>
+                <span style={{ color: "#333" }}>Host your </span><span style={{ color: "#fff" }}>React application</span><br />
+                <span style={{ color: "#fff" }}>in seconds.</span>
               </h1>
-              <p style={{ color: "#444", fontSize: "14px", lineHeight: 1.6, margin: 0 }}>
-                Deploy your React applications here. Powered by AWS ECS Fargate + S3.
-              </p>
+              <p>Paste a GitHub repo URL and get a live deployment. Powered by AWS ECS Fargate + S3.</p>
             </div>
 
             {/* Mobile: how it works accordion */}
@@ -202,12 +205,11 @@ export default function Home() {
             </div>
 
             {/* Sample repos */}
-            <div style={{ marginBottom: "12px", marginTop: "4px" }}>
-              <div style={{ fontSize: "12px", color: "#555", marginBottom: "8px", fontWeight: 500 }}>
+            <div>
+              <div style={{ fontSize: "12px", color: "#555", marginBottom: "10px", fontWeight: 500, lineHeight: 1.6 }}>
                 Try testing with these links, or use your own{" "}
                 <span style={{ color: "#fff", fontWeight: 700 }}>React application</span>
-                {" "}— paste any{" "}
-                <span style={{ color: "#888", fontWeight: 500 }}>GitHub repo</span>{" "}URL:
+                {" "}— paste any GitHub repo URL:
               </div>
               <div className="samples">
                 {SAMPLE_REPOS.map(r => (
@@ -215,7 +217,7 @@ export default function Home() {
                     style={{
                       background: copiedSample === r.url ? "#0a2e10" : "#0d0d0d",
                       border: `1px solid ${copiedSample === r.url ? "#11cd2f" : "#11cd2f55"}`,
-                      borderRadius: "8px", padding: "7px 13px",
+                      borderRadius: "8px", padding: "7px 14px",
                       color: copiedSample === r.url ? "#11cd2f" : "#ccc",
                       fontSize: "12px", fontWeight: 600, cursor: "pointer",
                       fontFamily: "Inter, sans-serif", transition: "all 0.15s",
@@ -230,7 +232,7 @@ export default function Home() {
             </div>
 
             {/* Deploy input */}
-            <div style={{ background: "#0d0d0d", border: "1px solid #1e1e1e", borderRadius: "14px", padding: "18px", marginBottom: "12px", marginTop: "12px" }}>
+            <div className="card">
               <div className="input-row">
                 <input
                   type="text"
@@ -256,11 +258,11 @@ export default function Home() {
 
             {/* Result */}
             {slug && (
-              <div style={{ background: "#0d0d0d", border: "1px solid #1e1e1e", borderRadius: "14px", padding: "16px 18px", marginBottom: "12px" }}>
+              <div className="card">
                 <div className="result-row">
                   <div>
-                    <div style={{ fontSize: "10px", letterSpacing: "2px", color: done ? "#11cd2f" : "#555", fontWeight: 600, marginBottom: "4px" }}>
-                      {done ? "✓ DEPLOYED" : "BUILDING..."}
+                    <div className="label" style={{ color: done ? "#11cd2f" : "#555", marginBottom: "4px" }}>
+                      {done ? "✓ Deployed" : "Building..."}
                     </div>
                     <div style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "-0.3px" }}>{slug}</div>
                     {done && deployUrl && (
@@ -296,10 +298,8 @@ export default function Home() {
 
             {/* Build logs */}
             {active && (
-              <div style={{ background: "#0d0d0d", border: "1px solid #1e1e1e", borderRadius: "14px", padding: "16px 18px" }}>
-                <div style={{ fontSize: "10px", letterSpacing: "2px", color: "#11cd2f", fontWeight: 600, marginBottom: "10px" }}>
-                  BUILD LOGS
-                </div>
+              <div className="card">
+                <div className="label" style={{ color: "#11cd2f", marginBottom: "10px" }}>Build Logs</div>
                 <div className="logs-box">
                   {logs.length === 0
                     ? <span style={{ color: "#2a2a2a" }}>Waiting for build output…</span>
