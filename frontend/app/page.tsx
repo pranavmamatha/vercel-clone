@@ -10,7 +10,6 @@ const SAMPLE_REPOS = [
   { label: "Brainwave", url: "https://github.com/adrianhajdin/brainwave" },
   { label: "Nike Landing", url: "https://github.com/adrianhajdin/nike_landing_page" },
   { label: "iPhone Clone", url: "https://github.com/adrianhajdin/iphone" },
-  { label: "Animated Portfolio", url: "https://github.com/safak/animated-portfolio" },
 ];
 
 type LogEntry = { id: string; text: string };
@@ -203,20 +202,31 @@ export default function Home() {
             </div>
 
             {/* Sample repos */}
-            <div className="samples">
-              {SAMPLE_REPOS.map(r => (
-                <button key={r.url} onClick={() => copySample(r.url)} title={r.url}
-                  style={{
-                    background: copiedSample === r.url ? "#0a2e10" : "#0d0d0d",
-                    border: `1px solid ${copiedSample === r.url ? "#11cd2f" : "#1e1e1e"}`,
-                    borderRadius: "8px", padding: "7px 13px",
-                    color: copiedSample === r.url ? "#11cd2f" : "#777",
-                    fontSize: "12px", fontWeight: 600, cursor: "pointer",
-                    fontFamily: "Inter, sans-serif", transition: "all 0.15s",
-                  }}>
-                  {copiedSample === r.url ? "✓ copied" : r.label}
-                </button>
-              ))}
+            <div style={{ marginBottom: "12px", marginTop: "4px" }}>
+              <div style={{ fontSize: "12px", color: "#555", marginBottom: "8px", fontWeight: 500 }}>
+                Try testing with these links, or use your own{" "}
+                <span style={{ color: "#fff", fontWeight: 700 }}>React application</span>
+                {" "}— paste any{" "}
+                <span style={{ color: "#888", fontWeight: 500 }}>GitHub repo</span>{" "}URL:
+              </div>
+              <div className="samples">
+                {SAMPLE_REPOS.map(r => (
+                  <button key={r.url} onClick={() => copySample(r.url)} title={r.url}
+                    style={{
+                      background: copiedSample === r.url ? "#0a2e10" : "#0d0d0d",
+                      border: `1px solid ${copiedSample === r.url ? "#11cd2f" : "#11cd2f55"}`,
+                      borderRadius: "8px", padding: "7px 13px",
+                      color: copiedSample === r.url ? "#11cd2f" : "#ccc",
+                      fontSize: "12px", fontWeight: 600, cursor: "pointer",
+                      fontFamily: "Inter, sans-serif", transition: "all 0.15s",
+                      boxShadow: copiedSample === r.url ? "none" : "0 0 8px #11cd2f22",
+                    }}
+                    onMouseEnter={e => { if (copiedSample !== r.url) { e.currentTarget.style.background = "#0a2e10"; e.currentTarget.style.color = "#11cd2f"; }}}
+                    onMouseLeave={e => { if (copiedSample !== r.url) { e.currentTarget.style.background = "#0d0d0d"; e.currentTarget.style.color = "#ccc"; }}}>
+                    {copiedSample === r.url ? "✓ copied" : r.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Deploy input */}
