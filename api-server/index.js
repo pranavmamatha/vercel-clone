@@ -72,7 +72,8 @@ app.post("/projects", async (req, res) => {
           name: 'builder-image',
           environment: [
             { name: 'GIT_REPOSITORY_URL', value: gitURL },
-            { name: 'PROJECT_ID', value: projectSlug }
+            { name: 'PROJECT_ID', value: projectSlug },
+            { name: 'REDIS', value: process.env.REDIS_ECS || process.env.REDIS }
           ]
         }
       ]
