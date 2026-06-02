@@ -76,7 +76,7 @@ app.post("/projects", async (req, res) => {
 
   await ecsClient.send(command);
 
-  return res.json({ status: "queued", data: { projectSlug, url: `http://${projectSlug}.localhost:8000` } })
+  return res.json({ status: "queued", data: { projectSlug, url: `https://${projectSlug}.vercel-clone.pranav.works` } })
 })
 
 async function initRedisSubscribe() {
