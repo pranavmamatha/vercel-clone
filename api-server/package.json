@@ -12,9 +12,16 @@
   "dependencies": {
     "@aws-sdk/client-ecs": "^3.1057.0",
     "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
     "express": "^5.2.1",
     "ioredis": "^5.11.0",
+    "pg": "^8.21.0",
     "random-word-slugs": "^0.1.7",
     "socket.io": "^4.8.3"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.20.0",
+    "drizzle-kit": "^0.31.10",
+    "tsx": "^4.22.4"
   }
 }

@@ -3,10 +3,12 @@ const { generateSlug } = require("random-word-slugs")
 const { ECSClient, RunTaskCommand } = require("@aws-sdk/client-ecs")
 const { Server } = require("socket.io")
 const Redis = require("ioredis")
+const { drizzle } = require("drizzle-orm/node-postgres")
 
 const app = express();
 require("dotenv").config()
 
+const db = drizzle(process.env.DATABASE_URL);
 const subscriber = new Redis(process.env.REDIS)
 
 const io = new Server({ cors: "*" })
