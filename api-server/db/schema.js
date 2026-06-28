@@ -1,10 +1,10 @@
-const { uuid, pgEnum, pgTable, text, timestamp } = require("drizzle-orm/pg-core")
+import { uuid, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core"
 
 export const deploymentStatus = pgEnum("deployment_status", ["NOT_STARTED", "QUEUED", "IN_PROGRESS", "READY", "FAIL"])
 
 export const userTable = pgTable("user", {
   id: uuid("id").primaryKey().defaultRandom(),
-  userName: text("user_name").notNull(),
+  userName: text("username").notNull(),
   email: text("email").notNull(),
   password: text("password").notNull()
 })
